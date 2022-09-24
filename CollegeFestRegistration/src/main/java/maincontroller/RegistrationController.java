@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import entity.Students;
+import entity.Registrations;
 import service.RegistrationService;
 
 @Controller
@@ -24,7 +24,7 @@ public class RegistrationController {
 
 	@GetMapping("/new_registration")
 	public String newRegistration(Model model) {
-		Students newRecord = new Students();
+		Registrations newRecord = new Registrations();
 		model.addAttribute(newRecord);
 		return "Registration";
 	}
@@ -37,22 +37,22 @@ public class RegistrationController {
 	
 	@GetMapping("/edit/{id}")
 	public String updateRecord(Model model, @PathVariable int id) {
-		Students setRecord = this.registerService.findRecord(id);
+		Registrations setRecord = this.registerService.findRecord(id);
 		model.addAttribute(setRecord);
 		return "Registration";
 	}
 	
 	@GetMapping("/all_records")
-	public ModelAndView printRecords(Map<String, List<Students>> map) {
+	public ModelAndView printRecords(Map<String, List<Registrations>> map) {
 		ModelAndView view = new ModelAndView("Display");
-		List<Students> records = registerService.printRecords();
+		List<Registrations> records = registerService.printRecords();
 		map.put("record", records);
 		return view;
 	}
 	
 	@PostMapping("/save_record")
-	public String insertOrUpdate(Students student) {
-		Students updatedRecord = null;
+	public String insertOrUpdate(Registrations student) {
+		Registrations updatedRecord = null;
 		System.out.println(student.getStudent_id());
 		if(student.getStudent_id() != 0) {
 			updatedRecord = registerService.findRecord(student.getStudent_id());
@@ -62,9 +62,10 @@ public class RegistrationController {
 			System.out.println(updatedRecord);
 		}
 		else {
-			updatedRecord = new Students(student.getStudent_name(), student.getStudent_dept(), student.getStudent_country());
+			updatedRecord = new Registrations(student.getStudent_name(), student.getStudent_dept(), student.getStudent_country());
 		}
-		this.registerService.saveOrUpdate(updatedRecord);
+		System.out.println(updatedRecord);
+		this.registerService.insertOrUpdate(updatedRecord);
 		return "redirect:/records/all_records";
 	} 
 

@@ -15,6 +15,10 @@ public class MainController {
 	{
 		return "Home";
 	}
+	@GetMapping("/*")
+	public String notFound() {
+		return "error";
+	}
 	
 
 }

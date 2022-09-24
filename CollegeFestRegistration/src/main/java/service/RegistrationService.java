@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 
 import org.hibernate.Session;
 
-import entity.Students;
+import entity.Registrations;
 
 @Service
 public class RegistrationService {
@@ -34,7 +34,7 @@ public class RegistrationService {
 	}
 	
 	@Transactional
-	public void saveOrUpdate(Students student) {
+	public void insertOrUpdate(Registrations student) {
 		Transaction tx = session.beginTransaction();
 		
 		session.saveOrUpdate(student);
@@ -43,10 +43,10 @@ public class RegistrationService {
 	}
 	
 	@Transactional
-	public Students findRecord(int student_id) {
+	public Registrations findRecord(int student_id) {
 		Transaction tx = session.beginTransaction();
 		
-		Students student = session.get(Students.class,student_id);
+		Registrations student = session.get(Registrations.class,student_id);
 		
 		tx.commit();
 		return student;
@@ -57,7 +57,7 @@ public class RegistrationService {
 		try {
 			Transaction tx = session.beginTransaction();
 			
-			Students student = session.get(Students.class, student_id);
+			Registrations student = session.get(Registrations.class, student_id);
 			session.delete(student);
 			
 			tx.commit();
@@ -69,10 +69,10 @@ public class RegistrationService {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Students> printRecords(){
+	public List<Registrations> printRecords(){
 		Transaction tx = session.beginTransaction();
 		
-		List<Students> records = session.createQuery("from Registrations").list();
+		List<Registrations> records = session.createQuery("from Registrations").list();
 		
 		tx.commit();
 		return records;

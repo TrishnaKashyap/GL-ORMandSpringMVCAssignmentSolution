@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "registrations")
-public class Students {
+public class Registrations {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int student_id;
@@ -17,12 +17,12 @@ public class Students {
 	private String student_country;
 
 //	default constructor
-	public Students() {
+	public Registrations() {
 		super();
 	}
 
 // parameterized constructor
-	public Students( String student_name, String student_dept, String student_country) {
+	public Registrations( String student_name, String student_dept, String student_country) {
 		super();
 		this.student_name = student_name;
 		this.student_dept = student_dept;
